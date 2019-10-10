@@ -1,0 +1,65 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+        arg("AROUTER_GENERATE_DOC", "enable")
+    }
+}
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    //buildToolsVersion "29.0.2"
+
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+    }
+
+    dataBinding.enabled true
+    resourcePrefix project.getName() + "_"
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+
+    api project(':libs:common')
+    api project(':libs:component')
+    api project(':store:wanandroid')
+
+    api "org.jetbrains.anko:anko-commons:0.10.8"
+    api "org.jetbrains.anko:anko-sdk25:0.10.8"
+
+    api "org.jetbrains.anko:anko:${dependVersion.anko}"
+    api "org.jetbrains.anko:anko-design:${dependVersion.anko}"
+    api "org.jetbrains.anko:anko-design-coroutines:${dependVersion.anko}"
+    api "org.jetbrains.anko:anko-percent:${dependVersion.anko}"
+    api "org.jetbrains.anko:anko-recyclerview-v7:${dependVersion.anko}"
+    api "org.jetbrains.anko:anko-recyclerview-v7-coroutines:${dependVersion.anko}"
+    api "org.jetbrains.anko:anko-constraint-layout:${dependVersion.anko}"
+    api "org.jetbrains.anko:anko-cardview-v7:${dependVersion.anko}"
+    api "org.jetbrains.anko:anko-gridlayout-v7:${dependVersion.anko}"
+
+    kapt arouterCompilerKapt
+}
