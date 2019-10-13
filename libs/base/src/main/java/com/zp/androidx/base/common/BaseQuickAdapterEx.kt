@@ -9,8 +9,8 @@ import androidx.databinding.ViewDataBinding
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.zp.androidx.base.R
-import org.jetbrains.anko.AnkoComponent
-import org.jetbrains.anko.AnkoContext
+//import org.jetbrains.anko.AnkoComponent
+//import org.jetbrains.anko.AnkoContext
 
 /**
  * Created by zhaopan on 2018/5/16.
@@ -91,15 +91,18 @@ open class DataBindingViewHolder(view: View): BaseViewHolder(view) {
 /**
  * ItemView的Anko实现接口.
  */
+/*
 interface AKItemViewUI<T> : AnkoComponent<ViewGroup> {
     override fun createView(ui: AnkoContext<ViewGroup>): View
 
     fun bind(akViewHolder: AKViewHolder<T>, item: T)
 }
 
+*/
 /**
  * Anko中用的BaseQuickAdapter的ViewHolder基类.
- */
+ *//*
+
 class AKViewHolder<T>(val akItemView: AKItemViewUI<T>, view: View) : BaseViewHolder(view) {
     fun bind(item: T) {
         akItemView.bind(this, item)
@@ -118,14 +121,18 @@ class AKViewHolder<T>(val akItemView: AKItemViewUI<T>, view: View) : BaseViewHol
     }
 }
 
+*/
 /**
  * Anko代码中使用的BaseQuickAdapter基类.
- */
+ *//*
+
 abstract class AKBaseQuickAdapter<T> : BaseQuickAdapter<T, AKViewHolder<T>>(-1) {
 
-    /**
+    */
+/**
      * 在Anko的RecyclerView中使用AkBaseQuickAdapter时, 仅需要为每个Item指定创建AkItemView实例即可.
-     */
+     *//*
+
     abstract fun onCreateItemView(): AKItemViewUI<T>
 
     override fun createBaseViewHolder(parent: ViewGroup, layoutResId: Int): AKViewHolder<T> {
@@ -142,4 +149,4 @@ abstract class AKBaseQuickAdapter<T> : BaseQuickAdapter<T, AKViewHolder<T>>(-1) 
     override fun convert(helper: AKViewHolder<T>, item: T) {
         helper.bind(item)
     }
-}
+}*/

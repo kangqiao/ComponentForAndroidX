@@ -1,4 +1,4 @@
-package com.zp.androidx.base.common
+package com.zp.androidx.common
 
 import android.app.Activity
 import android.content.ClipboardManager
@@ -10,11 +10,7 @@ import android.view.Gravity
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.zp.androidx.base.R
 import com.zp.androidx.common.topsnackbar.TSnackbar
-import org.jetbrains.anko.contentView
-import org.jetbrains.anko.support.v4.toast
-import org.jetbrains.anko.toast
 
 /**
  * Created by zhaopan on 2018/8/20.
@@ -33,20 +29,20 @@ inline fun snackBarToast(view: View, content: String, duration: Int = TSnackbar.
     return snackbar
 }
 
-@Deprecated("使用函数形式")
+/*@Deprecated("使用函数形式")
 fun Activity.toastOnSnackBar(content: String? = null, duration: Int = TSnackbar.LENGTH_SHORT){
     if(!content.isNullOrBlank() && null != this.contentView) {
         snackBarToast(this.contentView!!, content!!, duration)
     }
-}
+}*/
 
 fun Activity.fail(toastmsg: String? = null): Nothing{
-    if(!TextUtils.isEmpty(toastmsg)) this.toast(toastmsg!!)
+    if(!TextUtils.isEmpty(toastmsg)) this.baseContext.toast(toastmsg!!)
     throw RuntimeException(toastmsg?: " interrupt run !!!")
 }
 
 fun Fragment.fail(toastmsg: String? = null): Nothing{
-    if(!TextUtils.isEmpty(toastmsg)) this.toast(toastmsg!!)
+    if(!TextUtils.isEmpty(toastmsg)) this.context?.toast(toastmsg!!)
     throw RuntimeException(toastmsg?: " interrupt run !!!")
 }
 

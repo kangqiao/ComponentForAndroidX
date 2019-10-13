@@ -2,51 +2,40 @@ package com.zp.androidx.base.ui
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
-import android.net.http.SslError
 import android.os.Build
 import android.os.Bundle
-import android.text.TextUtils
-import android.view.*
-import android.webkit.*
-import android.widget.FrameLayout
+import android.view.KeyEvent
+import android.view.View
+import android.view.ViewGroup
+import android.webkit.WebSettings
+import android.webkit.WebView
 import android.widget.TextView
-import androidx.appcompat.widget.Toolbar
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
-import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
 import com.just.agentweb.AgentWeb
 import com.just.agentweb.DefaultWebClient
 import com.just.agentweb.NestedScrollAgentWebView
 import com.zp.androidx.base.R
 import com.zp.androidx.base.arch.BaseActivity
 import com.zp.androidx.component.RouterConfig
-import org.jetbrains.anko.*
-import org.jetbrains.anko.constraint.layout.constraintLayout
-import org.jetbrains.anko.design.themedAppBarLayout
+import kotlinx.android.synthetic.main.base_activity_web.*
+import kotlinx.android.synthetic.main.base_toolbar.*
+
 
 /**
  * Created by zhaopan on 2018/10/21.
  */
+
 @Route(path = RouterConfig.Base.WEB, name = "公共的Web页面")
 class WebActivity : BaseActivity() {
 
     companion object {
-        @Deprecated("采用ARouter形式, 方便管理.")
         @JvmOverloads
         @JvmStatic
-        fun open(
-            context: Context,
-            url: String,
-            title: String,
-            id: Int = 0,
-            isShowTitle: Boolean = true
-        ) {
+        fun open(context: Context, url: String, title: String, id: Int = 0, isShowTitle: Boolean = true) {
             context.startActivity(Intent(context, WebActivity::class.java).apply {
                 putExtra(RouterConfig.Base.Param.KEY_ID, id)
                 putExtra(RouterConfig.Base.Param.KEY_URL, url)
@@ -68,95 +57,75 @@ class WebActivity : BaseActivity() {
     }
 
     @Autowired(name = RouterConfig.Base.Param.KEY_ID)
-    @JvmField
-    var id = 0
+    @JvmField var id = 0
     @Autowired(name = RouterConfig.Base.Param.KEY_TITLE)
-    @JvmField
-    var title = ""
+    @JvmField var title = ""
     @Autowired(name = RouterConfig.Base.Param.KEY_URL)
-    @JvmField
-    var url = ""
+    @JvmField var url = ""
     @Autowired(name = RouterConfig.Base.Param.KEY_IS_SHOW_TITLE)
-    @JvmField
-    var isShowTitle = true
+    @JvmField var isShowTitle = true
 
-    private val ui: WebActivityUI by lazy { WebActivityUI() }
     private lateinit var agentWeb: AgentWeb
+    private lateinit var errorMsg: TextView
+    private val mWebView: NestedScrollAgentWebView by lazy {
+        NestedScrollAgentWebView(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ARouter.getInstance().inject(this)
-        id = argument(RouterConfig.Base.Param.KEY_ID, id)
-        url = argument(RouterConfig.Base.Param.KEY_URL, url)
-        title = argument(RouterConfig.Base.Param.KEY_TITLE, title)
-        isShowTitle = argument(RouterConfig.Base.Param.KEY_IS_SHOW_TITLE, isShowTitle)
-        ui.setContentView(this)
+        setContentView(R.layout.base_activity_web)
 
-        ui.toolbar.run {
-            //setTitle(R.string.loading)
-            setSupportActionBar(ui.toolbar)
-            supportActionBar?.setHomeButtonEnabled(true)
+        toolbar.apply {
+            setSupportActionBar(this)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            setNavigationOnClickListener { finish() }
         }
-        ui.tvTitle.apply {
-            setText(R.string.agentweb_loading)
-            visible()
-            postDelayed({
-                ui.tvTitle.isSelected = true
-            }, 2000)
+        iv_close.apply {
+            visibility = View.VISIBLE
+            setOnClickListener { finish() }
         }
+        tv_title.apply {
+            visibility = View.VISIBLE
+            text = getString(R.string.agentweb_loading)
+            isSelected = true
+        }
+        initWebView()
+    }
 
-        val layoutParams = CoordinatorLayout.LayoutParams(-1, -1)
+    private fun initWebView() {
+        val layoutParams = CoordinatorLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         layoutParams.behavior = AppBarLayout.ScrollingViewBehavior()
+        val errorView = layoutInflater.inflate(R.layout.base_web_error_page, null)
+        errorMsg = errorView.findViewById(R.id.error_msg)
+        errorMsg.text = getString(R.string.base_web_page_err, url)
 
-        agentWeb = AgentWeb.with(this)//传入Activity or Fragment
-            .setAgentWebParent(ui.webContainer, -1, layoutParams)//传入AgentWeb 的父控件
-            .useDefaultIndicator()// 使用默认进度条
-            .setWebView(NestedScrollAgentWebView(this))
+        agentWeb = AgentWeb.with(this)
+            .setAgentWebParent(web_container, 1, layoutParams)
+            .useDefaultIndicator()
+            .setWebView(mWebView)
             .setWebChromeClient(webChromeClient)
-            .setWebViewClient(webViewClient)
-            .setMainFrameErrorView(R.layout.agentweb_error_page, -1)
-            .setOpenOtherPageWays(DefaultWebClient.OpenOtherPageWays.ASK)//打开其他应用时，弹窗咨询用户是否前往其他应用
+            .setMainFrameErrorView(errorView)
+            .setOpenOtherPageWays(DefaultWebClient.OpenOtherPageWays.ASK)
             .createAgentWeb()
             .ready()
             .go(url)
 
-        agentWeb?.webCreator?.webView?.let {
-            it.settings.domStorageEnabled = true
+        agentWeb?.webCreator?.webView?.run {
+            settings.domStorageEnabled = true
+            webViewClient = mWebViewClient
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                it.settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+                settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
             }
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.base_menu_webpage, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
-            R.id.action_share -> {
-                Intent().run {
-                    action = Intent.ACTION_SEND
-                }
-                return true
-            }
-            R.id.action_like -> {
-
-                return true
-            }
-            R.id.action_browser -> {
-                Intent().run {
-                    action = "android.intent.action.VIEW"
-                    data = Uri.parse(url)
-                    startActivity(this)
-                }
-                return true
+    override fun onBackPressedSupport() {
+        agentWeb?.run {
+            if (!back()) {
+                super.onBackPressedSupport()
             }
         }
-        return super.onOptionsItemSelected(item)
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
@@ -183,96 +152,14 @@ class WebActivity : BaseActivity() {
         super.onDestroy()
     }
 
-    /**
-     * webViewClient
-     */
-    private val webViewClient = object : WebViewClient() {
-        override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
-            return super.shouldOverrideUrlLoading(view, request)
-        }
-
-        override fun onPageFinished(view: WebView?, url: String?) {
-            super.onPageFinished(view, url)
-        }
-
-        override fun onReceivedSslError(
-            view: WebView?,
-            handler: SslErrorHandler?,
-            error: SslError?
-        ) {
-            // super.onReceivedSslError(view, handler, error)
-            handler?.proceed()
-        }
-    }
-
-    /**
-     * webChromeClient
-     */
-    private val webChromeClient = object : WebChromeClient() {
-        override fun onProgressChanged(view: WebView, newProgress: Int) {
-        }
-
+    private val webChromeClient = object : com.just.agentweb.WebChromeClient() {
         override fun onReceivedTitle(view: WebView, title: String) {
             super.onReceivedTitle(view, title)
-            title.let {
-                // toolbar.title = it
-                ui.tvTitle.text = it
-            }
+            tv_title.text = title
         }
     }
-}
 
-class WebActivityUI : AnkoComponent<WebActivity> {
-    lateinit var rootView: ConstraintLayout
-    lateinit var appBarLayout: AppBarLayout
-    lateinit var toolbar: Toolbar
-    lateinit var tvTitle: TextView
-    lateinit var webContainer: FrameLayout
-
-    override fun createView(ui: AnkoContext<WebActivity>) = with(ui) {
-        constraintLayout {
-            id = View.generateViewId()
-            this@WebActivityUI.rootView = this
-            backgroundColorResource = R.color.base_bg_white
-
-            appBarLayout = themedAppBarLayout(R.style.base_AppTheme_AppBarOverlay) {
-                id = View.generateViewId()
-                fitsSystemWindows = true
-                elevation = dip(0).toFloat()
-
-                toolbar = toolbarV7 {
-                    id = View.generateViewId()
-                    fitsSystemWindows = true
-                    popupTheme = R.style.base_AppTheme_PopupOverlay
-
-                    tvTitle = textView {
-                        ellipsize = TextUtils.TruncateAt.MARQUEE
-                        singleLine = true
-                        textColorResource = R.color.white
-                        textSize = 18f
-                        gone()
-                    }.lparams(matchParent, wrapContent)
-                }.lparams(matchParent, attrDimen(android.R.attr.actionBarSize)) {
-                    scrollFlags = SCROLL_FLAG_SCROLL or SCROLL_FLAG_ENTER_ALWAYS
-                }
-            }.lparams(matchParent, wrapContent) {
-            }
-
-            webContainer = frameLayout {
-                id = View.generateViewId()
-                fitsSystemWindows = true
-                backgroundColorResource = R.color.base_bg_white
-            }.lparams(matchParent, matchParent) {
-                topMargin = attrDimen(android.R.attr.actionBarSize)
-                //topToBottom = appBarLayout.id
-            }
-
-            /*nestedScrollAgentWebView {
-
-            }.lparams(matchParent, matchParent){
-
-            }*/
-        }
+    private val mWebViewClient = object : com.just.agentweb.WebViewClient() {
     }
 
 }

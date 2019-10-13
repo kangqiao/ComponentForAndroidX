@@ -17,7 +17,9 @@ object AppConfig{
         HOME, KNOWLEDGE, USER, PROJECT
     )
 
-    fun prepareModules() = MAIN_APP_CONFIG
+    val EMPTY_CONFIG = emptyArray<String>()
+
+    fun prepareModules() = EMPTY_CONFIG
 
     fun initModuleApp(application: Application) {
         for (moduleApp in prepareModules()) {

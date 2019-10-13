@@ -1,4 +1,4 @@
-package com.zp.androidx.base.common
+package com.zp.androidx.common
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -106,7 +106,7 @@ fun EditText.disableSoftKeyboard() {
  * @param stiffness The stiffness of the animation, see [SpringForce]
  * @param dampingRatio The damping rate of the animation, see [SpringForce]
  */
-fun View.createSpringAnimation(
+/*fun View.createSpringAnimation(
     property: DynamicAnimation.ViewProperty,
     finalPosition: Float,
     stiffness: Float,
@@ -116,7 +116,7 @@ fun View.createSpringAnimation(
         this.stiffness = stiffness
         this.dampingRatio = dampingRatio
     }
-}
+}*/
 
 /**获取ActionBar的高度*/
 inline fun View.attrDimen(@AttrRes attr: Int, def: Int = 0): Int {

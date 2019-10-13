@@ -68,6 +68,11 @@
 
     <style name="base_AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="base_menu_animation">
+        <item name="android:windowEnterAnimation">@anim/base_menu_appear</item>
+        <item name="android:windowExitAnimation">@anim/base_menu_disappear</item>
+    </style>
+
     <!--Begin 文本样式集-->
     <style name="base_text_title">
         <item name="android:textColor">@color/base_text_title</item>

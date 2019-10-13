@@ -20,6 +20,8 @@
     <string name="base_data_error">Data acquisition failed</string>
     <string name="base_network_unavailable_tip">Network connection is not available, please check the network settings!</string>
 
+    <string name="base_web_page_err">Web %s load failed o(╥﹏╥)o</string>
+
     <!-- Menu Action -->
     <string name="base_action_search">Search</string>
     <string name="base_action_share">Share</string>

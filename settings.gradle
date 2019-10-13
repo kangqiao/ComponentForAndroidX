@@ -1,5 +1,5 @@
 // 主项目
-include ':app', ':base', ':component'
+include ':app'
 
 // 共享资源(针对特定项目app)
 include 'store:wanandroid'

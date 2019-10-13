@@ -2,13 +2,12 @@ package com.zp.androidx.common.flowlayout;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.v4.text.TextUtilsCompat;
 import android.util.AttributeSet;
 import android.util.LayoutDirection;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.zp.android.common.R;
+import androidx.core.text.TextUtilsCompat;
+import com.zp.androidx.common.R;
 
 import java.util.ArrayList;
 import java.util.Collections;

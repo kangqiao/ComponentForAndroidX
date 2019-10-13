@@ -1,6 +1,5 @@
 package com.zp.androidx.base.arch.mvp;
 
-import com.zp.android.base.mvp.BasePresenter;
 
 import org.jetbrains.annotations.Nullable;
 
