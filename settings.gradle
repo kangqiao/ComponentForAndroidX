@@ -11,7 +11,13 @@ include ':libs:lib_picker',  'libs:lib_statusview' //, ':libs:lib_api'
 include ':libs:common', ':libs:component', ':libs:base', ':libs:net'
 
 // 模块包
+include ':modules:test', ':modules:knowledge', ':modules:user'
 
 
+setBinding(new Binding([gradle: this]))
+evaluate(new File(
+        settingsDir,
+        'flutter_modules/.android/include_flutter.groovy'
+))
 
 rootProject.name='ComponentForAndroidX'

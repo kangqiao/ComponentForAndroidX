@@ -14,11 +14,11 @@ class APP : MainApp() {
 
     override fun onCreate() {
         super.onCreate()
-        //com.zp.android.api.initOkGoRequestApi(this/*, net.idik.lib.cipher.so.CipherClient.signkey()*/)
+        //com.zp.androidx.api.initOkGoRequestApi(this/*, net.idik.lib.cipher.so.CipherClient.signkey()*/)
         Log.e(TAG, BuildConfig.APPLICATION_ID)
-//        Log.e(TAG, com.zp.android.home.BuildConfig.APPLICATION_ID)
-//        Log.e(TAG, com.zp.android.user.BuildConfig.APPLICATION_ID)
-//        Log.e(TAG, com.zp.android.knowledge.BuildConfig.APPLICATION_ID)
-//        Log.e(TAG, com.zp.android.project.BuildConfig.APPLICATION_ID)
+//        Log.e(TAG, com.zp.androidx.home.BuildConfig.APPLICATION_ID)
+//        Log.e(TAG, com.zp.androidx.user.BuildConfig.APPLICATION_ID)
+//        Log.e(TAG, com.zp.androidx.knowledge.BuildConfig.APPLICATION_ID)
+//        Log.e(TAG, com.zp.androidx.project.BuildConfig.APPLICATION_ID)
     }
 }

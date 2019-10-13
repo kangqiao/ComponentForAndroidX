@@ -36,7 +36,7 @@ open abstract class MainApp: BaseApp(){
         super.onCreate()
 
         //不建议在Application初始化时加载插件, 应按需加载.
-        //com.zp.android.component.loadPlugin(this)
+        //com.zp.androidx.component.loadPlugin(this)
 
         // 初始化组件 Application
         AppConfig.initModuleApp(this)
@@ -54,8 +54,8 @@ open abstract class BaseApp: MultiDexApplication() {
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
         application = this
-        //com.zp.android.component.initVirtualApk(base)
-        //com.zp.android.net.initNetConfig(this)
+        //com.zp.androidx.component.initVirtualApk(base)
+        //com.zp.androidx.net.initNetConfig(this)
     }
 
     //BaseApp的OnCreate中写相关

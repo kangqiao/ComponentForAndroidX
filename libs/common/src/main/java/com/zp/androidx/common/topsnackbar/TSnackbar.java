@@ -156,7 +156,7 @@ public final class TSnackbar {
                 } else {
                     fallback = (ViewGroup) view;
                 }
-            } else if (/*view instanceof android.support.v7.widget.Toolbar ||*/ view instanceof Toolbar) {
+            } else if (/*view instanceof androidx.appcompat.widget.Toolbar ||*/ view instanceof Toolbar) {
                 /*
                     If we return the toolbar here, the toast will be attached inside the toolbar.
                     So we need to find a some sibling ViewGroup to the toolbar that comes after the toolbar

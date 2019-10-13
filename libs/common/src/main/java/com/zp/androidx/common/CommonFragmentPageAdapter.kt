@@ -1,4 +1,4 @@
-package com.zp.android.common
+package com.zp.androidx.common
 
 import android.annotation.SuppressLint
 import androidx.fragment.app.Fragment

@@ -7,11 +7,11 @@ import android.app.Application
  */
 
 object AppConfig{
-    const val TEST = "com.zp.android.test.TestApp"
-    const val HOME = "com.zp.android.home.HomeApp"
-    const val KNOWLEDGE = "com.zp.android.knowledge.KnowledgeApp"
-    const val USER = "com.zp.android.user.UserApp"
-    const val PROJECT = "com.zp.android.project.ProjectApp"
+    const val TEST = "com.zp.androidx.test.TestApp"
+    const val HOME = "com.zp.androidx.home.HomeApp"
+    const val KNOWLEDGE = "com.zp.androidx.knowledge.KnowledgeApp"
+    const val USER = "com.zp.androidx.user.UserApp"
+    const val PROJECT = "com.zp.androidx.project.ProjectApp"
 
     val MAIN_APP_CONFIG = arrayOf(
         HOME, KNOWLEDGE, USER, PROJECT
