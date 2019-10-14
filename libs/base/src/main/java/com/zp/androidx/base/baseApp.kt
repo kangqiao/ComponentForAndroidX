@@ -12,6 +12,7 @@ import com.zp.androidx.base.utils.I18NUtil
 import com.zp.androidx.base.utils.SPUtil
 import me.yokeyword.fragmentation.Fragmentation
 import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidFileProperties
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
@@ -55,7 +56,7 @@ open abstract class BaseApp: MultiDexApplication() {
         super.attachBaseContext(base)
         application = this
         //com.zp.androidx.component.initVirtualApk(base)
-        //com.zp.androidx.net.initNetConfig(this)
+        com.zp.androidx.net.initNetConfig(this)
     }
 
     //BaseApp的OnCreate中写相关
@@ -66,6 +67,7 @@ open abstract class BaseApp: MultiDexApplication() {
         startKoin{
             androidLogger(level = Level.DEBUG)
             androidContext(this@BaseApp)
+            androidFileProperties()
             //modules(appModule)
         }
 
@@ -97,7 +99,7 @@ open abstract class BaseApp: MultiDexApplication() {
                 .install()
 
         //初始化语言设置
-        //I18NUtil.changeAppLanguage(this)
+        I18NUtil.changeAppLanguage(this)
     }
 
     override fun onConfigurationChanged(newConfig: Configuration?) {

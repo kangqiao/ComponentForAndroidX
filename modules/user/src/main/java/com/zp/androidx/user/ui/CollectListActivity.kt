@@ -28,7 +28,7 @@ import com.zp.androidx.user.BR
 import com.zp.androidx.user.CollectionResponseBody
 import kotlinx.android.synthetic.main.user_activity_refresh_layout.*
 import timber.log.Timber
-import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 /**

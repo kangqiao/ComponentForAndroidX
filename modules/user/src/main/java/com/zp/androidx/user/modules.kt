@@ -19,8 +19,11 @@ val moduleList = module(createdAtStart = true) {
 
     // User 模块专属ShardPreferences配置.
     single { SPSingleton.get(BaseApp.application, "User") }
+
     // HomeApi 网络请求
     single { RetrofitHelper.createService(ServerAPI::class.java) }
+
     // UserService
     single { UserService(get(), get())}
+    single { UserService2()}
 }

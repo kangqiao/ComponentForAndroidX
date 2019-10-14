@@ -7,6 +7,9 @@ import android.widget.TextView
 import android.widget.Toast
 import com.zp.androidx.base.R
 
+/**
+ * Created by zhaopan on 2018/4/23.
+ */
 class CustomToast {
 
     private var toast: Toast

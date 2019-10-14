@@ -32,6 +32,7 @@ import com.zp.androidx.knowledge.R
 import com.zp.androidx.net.NetUtils
 import kotlinx.android.synthetic.main.knowledge_fragment_refresh_layout.*
 import me.yokeyword.fragmentation.SupportFragment
+import org.koin.androidx.scope.currentScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
@@ -62,6 +63,7 @@ class DetailFragment : BaseFragment() {
     @Autowired(name = CONTENT_CID_KEY)
     @JvmField var cid: Int = -1
 
+    val viewModel2 = currentScope.inject<ViewModel>()
     private val viewModel by viewModel<ViewModel>()
     private lateinit var adapter: BaseQuickAdapter<Article, DBViewHolder>
 

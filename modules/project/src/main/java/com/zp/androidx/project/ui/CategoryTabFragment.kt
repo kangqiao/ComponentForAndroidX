@@ -6,8 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
-import com.zp.androidx.base.BaseFragment
-import com.zp.androidx.base.utils.ViewUtil
+import com.zp.androidx.base.arch.BaseFragment
 import com.zp.androidx.common.CommonFragmentStatePageAdapter
 import com.zp.androidx.component.RouterConfig
 import com.zp.androidx.project.ProjectTreeBean

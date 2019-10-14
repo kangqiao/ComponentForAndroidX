@@ -53,6 +53,10 @@ import java.util.UUID;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
+
+/**
+ * Created by zhaopan on 2019/09/10.
+ */
 public class ImagePickerDialog extends DialogFragment {
     private static final String TAG = "ImagePickerDialog";
     @VisibleForTesting

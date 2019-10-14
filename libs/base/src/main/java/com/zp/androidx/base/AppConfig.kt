@@ -19,7 +19,7 @@ object AppConfig{
 
     val EMPTY_CONFIG = emptyArray<String>()
 
-    fun prepareModules() = EMPTY_CONFIG
+    fun prepareModules() = MAIN_APP_CONFIG
 
     fun initModuleApp(application: Application) {
         for (moduleApp in prepareModules()) {

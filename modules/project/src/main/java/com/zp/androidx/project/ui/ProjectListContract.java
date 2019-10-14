@@ -1,7 +1,7 @@
 package com.zp.androidx.project.ui;
 
-import com.zp.androidx.base.mvp.BasePresenter;
-import com.zp.androidx.base.mvp.BaseView;
+import com.zp.androidx.base.arch.mvp.BasePresenter;
+import com.zp.androidx.base.arch.mvp.BaseView;
 import com.zp.androidx.project.ArticleResponseBody;
 
 /**

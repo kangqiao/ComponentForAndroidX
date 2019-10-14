@@ -1,10 +1,11 @@
 package com.zp.androidx.project.ui;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,11 +14,11 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.zp.androidx.base.BaseFragment;
-import com.zp.androidx.base.CtxUtil;
+import com.zp.androidx.base.arch.BaseFragment;
+import com.zp.androidx.base.common.DBViewHolder;
 import com.zp.androidx.base.ui.WebActivity;
+import com.zp.androidx.base.utils.CtxUtil;
 import com.zp.androidx.common.ContextExKt;
-import com.zp.androidx.common.DBViewHolder;
 import com.zp.androidx.common.widget.SpaceItemDecoration;
 import com.zp.androidx.component.RouterConfig;
 import com.zp.androidx.component.ServiceManager;

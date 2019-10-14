@@ -24,7 +24,7 @@ import timber.log.Timber
  */
 
 @Route(path = RouterConfig.User.SERVICE, name = "用户服务类")
-class UserService2 : IUserService, KoinComponent {
+class UserService2: IUserService, KoinComponent {
 
     //手动注入需要的spStorage和server
     private val spStorage: SPSingleton by inject()
@@ -71,7 +71,7 @@ class UserService2 : IUserService, KoinComponent {
 }
 
 // 采用Koin的single方式自动注入spStorage和server单实例
-class UserService(val spStorage: SPSingleton, val server: ServerAPI) : IUserService {
+class UserService(val spStorage: SPSingleton, val server: ServerAPI): IUserService {
 
     override fun init(context: Context) {
         Log.w("UserService", "spStorage=${spStorage}")

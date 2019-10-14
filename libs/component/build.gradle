@@ -44,7 +44,7 @@ dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
 
-    api arouter_lib
+    api depend.arouterApi
     api net_libs.retrofitKotlinMoshi
     kapt arouterCompilerKapt
 }

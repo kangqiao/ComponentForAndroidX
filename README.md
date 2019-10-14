@@ -9,6 +9,18 @@ Android轻量级组件化架构实现(基于AndroidX, Kotlin, MVVM)
 
 ## [AndroidX项目中接入Flutter](https://juejin.im/post/5d4002b4f265da03925a2165)
 
+
+
+### MVVM 之 LiveData 
+###### 要点概述
+- LiveData的观察者可以联动生命周期, 也可以不联动
+- LiveData的观察者只能与一个LifecycleOwner绑定, 否则会抛出异常
+- 当观察者的active状态变更的时候
+  - active->inactive : 如果LiveCycler通知OnDestroy, 则移除对应的观察者, 切当所有观察者都非活跃的状态下时, 会触发onInactive
+  - inactive->active: 会通知观察者最近的数据更新(粘性消息)
+- 除了观察者状态变更时, 会接收到数据更新的通知外, 还有一种就是在活跃的情况下, 通过开发者主动更新数据, 会接收到数据更新的通知.
+
+
 ### 创建flutter module
 进入当前android项目，在根目录运行如下命令：
 

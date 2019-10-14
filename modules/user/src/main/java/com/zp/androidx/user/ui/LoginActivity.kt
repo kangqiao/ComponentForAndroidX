@@ -18,7 +18,7 @@ import com.zp.androidx.component.event.LoginSuccessEvent
 import com.zp.androidx.user.R
 import com.zp.androidx.user.databinding.UserActivityLoginBinding
 import timber.log.Timber
-import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Created by zhaopan on 2018/11/7.

@@ -17,7 +17,7 @@ import com.zp.androidx.component.RouterConfig
 import com.zp.androidx.user.R
 import com.zp.androidx.user.databinding.UserActivityRegisterBinding
 import timber.log.Timber
-import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Created by zhaopan on 2018/11/8.

@@ -1,6 +1,6 @@
 package com.zp.androidx.project.ui;
 
-import com.zp.androidx.base.mvp.JavaPresenter;
+import com.zp.androidx.base.arch.mvp.JavaPresenter;
 import com.zp.androidx.base.utils.RxUtil;
 import com.zp.androidx.project.ServerAPI;
 import io.reactivex.functions.Action;

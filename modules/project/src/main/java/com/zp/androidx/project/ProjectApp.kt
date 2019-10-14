@@ -3,7 +3,7 @@ package com.zp.androidx.project
 import android.app.Application
 import com.zp.androidx.base.ModuleApp
 import com.zp.androidx.base.utils.RxUtil
-import com.zp.androidx.base.utils.SPStorage
+import com.zp.androidx.base.utils.SPSingleton
 import org.koin.core.KoinComponent
 import org.koin.core.context.loadKoinModules
 import org.koin.core.inject
@@ -15,7 +15,7 @@ import org.koin.core.inject
 class ProjectApp : ModuleApp(), KoinComponent {
 
     private val serverApi: ServerAPI by inject()
-    private val spStorage: SPStorage by inject()
+    private val spStorage: SPSingleton by inject()
 
     override fun onCreate() {
         super.onCreate()
