@@ -16,9 +16,8 @@ object ServiceManager {
         //ARouter.getInstance().inject(this)
     }
 
-    @Autowired
-    lateinit var testService: ITestService
-
+    //@Autowired
+    //@JvmField lateinit var testService: ITestService
 
     /**
      * 两种设置UserService的方式都可用, 各有优缺点. 主要创建时机不同."
