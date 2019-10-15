@@ -1,7 +1,6 @@
 package com.zp.androidx.net.exception
 
 import android.util.Log
-import com.google.gson.JsonParseException
 import org.json.JSONException
 import java.net.ConnectException
 import java.net.SocketTimeoutException
@@ -26,8 +25,7 @@ class ExceptionHandle {
                 Log.e("TAG", "网络连接异常: " + e.message)
                 errorMsg = "网络连接异常"
                 errorCode = ErrorStatus.NETWORK_ERROR
-            } else if (e is JsonParseException
-                    || e is JSONException
+            } else if (e is JSONException
                     || e is ParseException) {   //均视为解析错误
                 Log.e("TAG", "数据解析异常: " + e.message)
                 errorMsg = "数据解析异常"

@@ -15,6 +15,7 @@ ext {
             navigation              : "2.0.0",
 
             retrofit                : "2.4.0",
+            okhttp                  : "3.11.0",
             glide                   : "4.10.0",
             jackson                 : "2.10.0",
 
@@ -109,9 +110,9 @@ ext {
             "adapter-rxjava"            : "com.squareup.retrofit2:adapter-rxjava2:${dependVersion.retrofit}",
             // "converter-gson"            : "com.squareup.retrofit2:converter-gson:${dependVersion.retrofit}",
             "converter-scalars"         : "com.squareup.retrofit2:converter-scalars:${dependVersion.retrofit}",
-            "okhttp"                    : "com.squareup.okhttp3:okhttp:3.11.0",
-            "okhttp3LoggerInterceptor"  : 'com.squareup.okhttp3:logging-interceptor:3.11.0',
-            "retrofitConverterMoshi"    : 'com.squareup.retrofit2:converter-moshi:2.4.0',
+            "okhttp"                    : "com.squareup.okhttp3:okhttp:${dependVersion.okhttp}",
+            "okhttp3LoggerInterceptor"  : "com.squareup.okhttp3:logging-interceptor:${dependVersion.okhttp}",
+            "retrofitConverterMoshi"    : "com.squareup.retrofit2:converter-moshi:2.4.0",
             "retrofitKotlinMoshi"       : "com.squareup.moshi:moshi-kotlin:1.8.0",
     ]
 

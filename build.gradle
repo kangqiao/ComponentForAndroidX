@@ -50,7 +50,24 @@ task clean(type: Delete) {
 }
 
 subprojects {
-
+    configurations.all {
+        resolutionStrategy {
+            force "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
+            force (group: "org.jetbrains.kotlin", name: 'kotlin-reflect', version: "${versions.kotlin}")
+            force (group: "com.squareup.okhttp3", name: 'okhttp', version: "3.11.0")
+        }
+    }
+    /*configurations.all {
+        resolutionStrategy {
+            eachDependency { details ->
+                // Force all the error-prone dependencies to use the same version.
+                if (details.requested.group == 'com.google.errorprone' &&
+                        details.requested.name.startsWith('error_prone_')) {
+                    details.useVersion versions.errorProne
+                }
+            }
+        }
+    }*/
     //设置各子项目的build目录统一到rootProject下的build目录中
     if (project.projectDir.path.startsWith(rootProject.projectDir.path)) {
         project.buildDir = project.projectDir.path.replaceFirst(rootProject.projectDir.path, rootProject.buildDir.path)
