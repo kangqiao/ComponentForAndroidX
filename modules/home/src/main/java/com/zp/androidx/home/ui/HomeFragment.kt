@@ -1,6 +1,5 @@
 package com.zp.androidx.home.ui
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,8 +12,10 @@ import cn.bingoogolapple.bgabanner.BGABanner
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.bumptech.glide.Glide
+import com.chad.library.adapter.base.BaseQuickAdapter
 import com.zp.androidx.base.arch.BaseFragment
 import com.zp.androidx.base.arch.mvvm.*
+import com.zp.androidx.base.common.DBViewHolder
 import com.zp.androidx.base.common.DataBindingQuickAdapter
 import com.zp.androidx.base.common.DataBindingViewHolder
 import com.zp.androidx.base.ui.WebActivity
@@ -26,6 +27,7 @@ import com.zp.androidx.component.ServiceManager
 import com.zp.androidx.component.service.BackResult
 import com.zp.androidx.component.service.HandleCallBack
 import com.zp.androidx.home.BR
+import com.zp.androidx.home.R
 import com.zp.androidx.home.Article
 import com.zp.androidx.home.ArticleResponseBody
 import com.zp.androidx.home.BannerItem
@@ -53,9 +55,9 @@ class HomeFragment : BaseFragment() {
     }
 
     private val viewModel by viewModel<HomeViewModel>()
-    private lateinit var statusView: StatusView
+    //private lateinit var statusView: StatusView
     val bannerView: BGABanner by lazy { initAndAddBannerView() }
-    private lateinit var adapter: DataBindingQuickAdapter<Article>
+    private lateinit var adapter: BaseQuickAdapter<Article, DBViewHolder>
     private var isRefresh = false
     private var bannerList: List<BannerItem>? = null
 
@@ -64,7 +66,16 @@ class HomeFragment : BaseFragment() {
     }
 
     override fun initView(view: View) {
-        swipeRefreshLayout.setColorSchemeColors(Color.RED, Color.GREEN, Color.BLUE)
+        //statusView = initStatusView(R.id.recyclerView)
+        statusView.config(StatusViewBuilder.Builder()
+            .setOnEmptyRetryClickListener {
+                requestHomeData(true, 0)
+            }
+            .setOnErrorRetryClickListener {
+                requestHomeData(true, 0)
+            }
+            .build())
+
         swipeRefreshLayout.setOnRefreshListener {
             isRefresh = true
             adapter.setEnableLoadMore(false)
@@ -76,8 +87,8 @@ class HomeFragment : BaseFragment() {
             addItemDecoration(DividerItemDecoration(_mActivity, DividerItemDecoration.VERTICAL).apply {
                 ContextCompat.getDrawable(_mActivity, R.drawable.base_divider_line)?.let { setDrawable(it) }
             })
-        }.adapter = object : DataBindingQuickAdapter<Article>(R.layout.home_item_home) {
-            override fun convert(holder: DataBindingViewHolder, item: Article) {
+        }.adapter = object : BaseQuickAdapter<Article, DBViewHolder>(R.layout.home_item_home) {
+            override fun convert(holder: DBViewHolder, item: Article) {
                 holder.bindTo(BR.item, item)
             }
         }.apply {
@@ -123,40 +134,35 @@ class HomeFragment : BaseFragment() {
             }, recyclerView)
         }
 
-        statusView = initStatusView(R.id.recyclerView)
-        statusView.config(StatusViewBuilder.Builder()
-            .setOnEmptyRetryClickListener {
-                requestHomeData(true, 0)
-            }
-            .setOnErrorRetryClickListener {
-                requestHomeData(true, 0)
-            }
-            .build())
-        viewModel.events.observe(this, Observer { event ->
-            when (event) {
-                is LoadingEvent -> { /*显示加载中...*/
-                    statusView.showLoadingView()
+        viewModel.run {
+            events.observe(this@HomeFragment, Observer { event ->
+                when (event) {
+                    is LoadingEvent -> { /*显示加载中...*/
+                        statusView.showLoadingView()
+                    }
+                    is SuccessEvent -> { /*加载完成.*/
+                        statusView.showContentView()
+                    }
+                    is FailedEvent -> {
+                        showToast(event.errorMsg)
+                        statusView.showErrorView()
+                    }
+                    is ExceptionEvent -> {
+                        Timber.e(event.error)
+                        statusView.showErrorView()
+                    }
                 }
-                is SuccessEvent -> { /*加载完成.*/
-                    statusView.showContentView()
+            })
+
+            articleData.observe(this@HomeFragment, Observer {
+                it?.let { updateArticleData(it) }
+            })
+            bannerList.observe(this@HomeFragment, Observer {
+                it?.let {
+                    updateBannerList(it)
                 }
-                is FailedEvent -> {
-                    showToast(event.errorMsg)
-                    statusView.showErrorView()
-                }
-                is ExceptionEvent -> {
-                    Timber.e(event.error)
-                }
-            }
-        })
-        viewModel.articleData.observe(this, Observer {
-            it?.let { updateArticleData(it) }
-        })
-        viewModel.bannerList.observe(this, Observer {
-            it?.let {
-                updateBannerList(it)
-            }
-        })
+            })
+        }
 
         requestHomeData(true, 0)
     }
@@ -166,7 +172,7 @@ class HomeFragment : BaseFragment() {
      */
     private fun initAndAddBannerView(): BGABanner {
         val bannerLayout = LayoutInflater.from(recyclerView.context).inflate(R.layout.home_banner_layout, null, false)
-        val banner: BGABanner = bannerLayout.find(R.id.banner)
+        val banner: BGABanner = bannerLayout.findViewById(R.id.banner)
         banner.run {
             setAdapter { _, itemView, model, _ ->
                 if (itemView is ImageView && model is BannerItem && model.getImageUrl()?.isNotEmpty()) {
@@ -229,6 +235,5 @@ class HomeFragment : BaseFragment() {
             }
         }
     }
-
 
 }

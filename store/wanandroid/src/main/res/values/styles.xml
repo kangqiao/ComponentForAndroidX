@@ -25,6 +25,8 @@
 
     <style name="SplashTheme" parent="BaseAppTheme.NoActionBar">
         <item name="android:windowFullscreen">true</item>
+        <item name="android:windowDisablePreview">false</item>
+        <item name="android:windowBackground">@mipmap/welcome</item>
     </style>
 
     <style name="BaseAppTheme.NoActionBar">

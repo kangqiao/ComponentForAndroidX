@@ -7,12 +7,20 @@
     android:layout_height="match_parent"
     android:background="@color/viewBackground">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <com.zp.androidx.lib.statusview.StatusView
+        android:id="@+id/statusView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listItem="@layout/home_item" />
+        app:sv_empty_view="@layout/sv_empty_layout"
+        app:sv_error_view="@layout/sv_error_layout">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listItem="@layout/home_item_home" />
+
+    </com.zp.androidx.lib.statusview.StatusView>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

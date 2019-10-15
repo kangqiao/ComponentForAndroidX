@@ -61,7 +61,10 @@ fun isBindingView(view: View): Boolean {
 open abstract class DataBindingQuickAdapter<T> constructor(@LayoutRes layoutResId: Int, data: List<T>? = null): BaseQuickAdapter<T, DataBindingViewHolder>(layoutResId, data) {
 
     override fun getItemView(layoutResId: Int, parent: ViewGroup): View {
-        val binding = DataBindingUtil.inflate<ViewDataBinding>(mLayoutInflater, layoutResId, parent, false) ?: return super.getItemView(layoutResId, parent)
+        val binding = DataBindingUtil.inflate<ViewDataBinding>(mLayoutInflater, layoutResId, parent, false)
+        if (binding == null) {
+            return super.getItemView(layoutResId, parent)
+        }
         val view = binding.root
         view.setTag(R.id.BaseQuickAdapter_databinding_support, binding)
         return view

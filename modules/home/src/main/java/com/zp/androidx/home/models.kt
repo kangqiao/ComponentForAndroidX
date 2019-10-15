@@ -1,5 +1,6 @@
 package com.zp.androidx.home
 
+import android.view.View
 import com.squareup.moshi.Json
 import java.io.Serializable
 
@@ -46,6 +47,7 @@ data class Article(
     @Json(name = "top") var top: String
 ) : Serializable {
     val likeIcon get() = if (collect) R.drawable.ic_like else R.drawable.ic_like_not
+    val isShowTop get() = "1".equals(top)
 }
 
 data class Tag(

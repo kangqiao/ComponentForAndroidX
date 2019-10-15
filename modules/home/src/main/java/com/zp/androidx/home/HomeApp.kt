@@ -14,7 +14,7 @@ class HomeApp : ModuleApp() {
         initModuleApp(this)
         initModuleData(this)
         //todo 独立运行时, 测试环境设置. 此处可设置测试网络.
-        //com.zp.android.net.initNetConfig(this, "zp")
+        //com.zp.androidx.net.initNetConfig(this, "zp")
     }
 
     override fun initModuleApp(application: Application) {

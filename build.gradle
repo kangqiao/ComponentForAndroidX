@@ -27,8 +27,9 @@ buildscript {
 
         //classpath 'com.github.MEiDIK:Cipher.so:dev-SNAPSHOT'
         classpath "com.alibaba:arouter-register:${versions.arouter_register}"
-        //classpath 'com.didi.virtualapk:gradle:0.9.8.6'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
+        //classpath 'com.didi.virtualapk:gradle:0.9.8.6''
+        classpath 'com.dicedmelon.gradle:jacoco-android:0.1.4'
+        classpath 'net.ltgt.gradle:gradle-errorprone-plugin:0.0.16'
     }
 }
 
@@ -55,6 +56,7 @@ subprojects {
             force "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
             force (group: "org.jetbrains.kotlin", name: 'kotlin-reflect', version: "${versions.kotlin}")
             force (group: "com.squareup.okhttp3", name: 'okhttp', version: "3.11.0")
+            force (group: "io.reactivex.rxjava2", name: 'rxjava', version: "2.2.10")
         }
     }
     /*configurations.all {

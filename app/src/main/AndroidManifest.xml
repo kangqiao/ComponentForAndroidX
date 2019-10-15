@@ -10,6 +10,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <!--<activity
+            android:name="ui.SplashActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>-->
         <activity
             android:name=".ui.MainActivity"
             android:launchMode="singleTask">
@@ -20,7 +30,6 @@
         </activity>
 
         <activity android:name=".ui.search.SearchActivity"/>
-        <activity android:name=".ui.DebugActivity"/>
     </application>
 
 </manifest>

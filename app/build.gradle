@@ -11,19 +11,37 @@ kapt {
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
-    buildToolsVersion "29.0.2"
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+
     defaultConfig {
         applicationId "com.zp.androidx.app"
+        multiDexEnabled true
+
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        renderscriptTargetApi rootProject.ext.android.minSdkVersion
+        renderscriptSupportModeEnabled true
+
+        ndk {
+            abiFilters "armeabi-v7a", "x86_64", "x86"
+        }
     }
+
+    dataBinding.enabled true
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            testCoverageEnabled true
         }
     }
 
@@ -31,13 +49,51 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    packagingOptions {
+        pickFirst 'META-INF/*'
+        exclude 'lib/armeabi/libcoldlar-lib.so'
+        exclude 'org/apache/commons/codec/language/bm/gen_approx_hungarian.txt'
+        exclude 'org/apache/commons/codec/language/bm/*.txt'
+        exclude 'org/apache/commons/codec/**'
+        exclude 'javax/annotation/**'
+        exclude 'com/google/**'
+        exclude 'org/bitcoinj/**'
+
+        exclude 'LICENSE.txt'
+    }
+
+    lintOptions {
+        //textOutput "stdout"
+        //textReport true
+        //checkAllWarnings true
+        //warningsAsErrors true
+        //showAll true
+        //explainIssues true
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-
+    api project(':store:wanandroid')
     implementation project(':libs:base')
+
+    runtimeOnly project(':modules:home')
+    runtimeOnly project(':modules:knowledge')
+    runtimeOnly project(':modules:user')
+    runtimeOnly project(':modules:project')
 
     kapt arouterCompilerKapt
 

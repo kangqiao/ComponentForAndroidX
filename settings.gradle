@@ -5,13 +5,13 @@ include ':app'
 include 'store:wanandroid'
 
 // 工具包
-include ':libs:lib_picker',  'libs:lib_statusview' //, ':libs:lib_api'
+include ':libs:lib_picker',  'libs:lib_statusview'
 
 // 基础包
 include ':libs:common', ':libs:component', ':libs:base', ':libs:net'
 
 // 模块包
-include ':modules:test', ':modules:knowledge', ':modules:user', ':modules:project', ':modules:home'
+include ':modules:knowledge', ':modules:user', ':modules:project', ':modules:home' //, ':modules:test'
 
 
 setBinding(new Binding([gradle: this]))
