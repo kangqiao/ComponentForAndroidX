@@ -28,6 +28,9 @@ import kotlinx.android.synthetic.main.toolbar.*
 import me.yokeyword.fragmentation.ISupportFragment
 import me.yokeyword.fragmentation.SupportFragment
 
+/**
+ * Created by zhaopan on 2019-10-15.
+ */
 
 @Route(path = RouterConfig.APP.MAIN, name = "App首页")
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {

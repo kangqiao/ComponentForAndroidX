@@ -9,7 +9,7 @@ import com.zp.androidx.component.RouterConfig
 import kotlinx.android.synthetic.main.toolbar_search.*
 
 /**
- * Created by zhaopan on 2018/11/1.
+ * Created by zhaopan on 2019-10-15.
  */
 
 @Route(path = RouterConfig.APP.SEARCH, name = "搜索页面")
