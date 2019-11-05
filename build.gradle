@@ -57,6 +57,29 @@ subprojects {
             force (group: "org.jetbrains.kotlin", name: 'kotlin-reflect', version: "${versions.kotlin}")
             force (group: "com.squareup.okhttp3", name: 'okhttp', version: "3.11.0")
             force (group: "io.reactivex.rxjava2", name: 'rxjava', version: "2.2.10")
+
+            //AndroidX Version
+            force "androidx.activity:activity:1.0.0"
+            force "androidx.annotation:annotation:1.0.0"
+            force "androidx.appcompat:appcompat:1.1.0"
+            force "androidx.appcompat:appcompat-resource:1.1.0"
+            force "androidx.arch.core:core-common:2.1.0"
+            force "androidx.arch.core:core-runtime:2.1.0"
+            force "androidx.cardview:cardview:1.0.0"
+            force "androidx.collection:collection:1.1.0"
+            force "androidx.coordinatorlayout:coordinatorlayout:1.1.0-alpha01"
+            force "androidx.core:core:1.1.0"
+            force "androidx.fragment:fragment:1.1.0"
+            force "androidx.lifecycle:lifecycle-common:2.1.0"
+            force "androidx.lifecycle:lifecycle-livedata:2.1.0"
+            force "androidx.lifecycle:lifecycle-livedata-core:2.1.0"
+            force "androidx.lifecycle:lifecycle-runtime:2.1.0"
+            force "androidx.lifecycle:lifecycle-viewmodel:2.1.0"
+            force "androidx.savedstate:savedstate:1.0.0-alpha02"
+            force "androidx.vectordrawable:vectordrawable:1.1.0"
+            force "androidx.vectordrawable:vectordrawable-animated:1.1.0"
+            force "androidx.versionedparcelable:versionedparcelable:1.1.0"
+
         }
     }
     /*configurations.all {
