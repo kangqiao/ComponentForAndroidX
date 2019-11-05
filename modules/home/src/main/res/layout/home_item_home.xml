@@ -32,7 +32,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:text="@{item.author}"
-                tools:text="@string/app_name" />
+                tools:text="作者" />
 
             <TextView
                 android:id="@+id/on_top"
@@ -93,7 +93,7 @@
                 app:layout_constraintTop_toBottomOf="@id/author"
                 app:layout_goneMarginStart="@dimen/dp_05"
                 android:text="@{item.title}"
-                tools:text="@string/app_name" />
+                tools:text="标题" />
 
             <TextView
                 android:id="@+id/desc"
@@ -109,7 +109,7 @@
                 app:layout_constraintStart_toStartOf="@id/title"
                 app:layout_constraintTop_toBottomOf="@id/title"
                 android:text="@{item.desc}"
-                tools:text="@string/app_name" />
+                tools:text="描述" />
 
             <ImageView
                 android:id="@+id/thumbnail"
@@ -131,7 +131,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:text="@{item.chapterName}"
-                tools:text="@string/app_name" />
+                tools:text="类别" />
 
             <ImageView
                 android:id="@+id/iv_like"

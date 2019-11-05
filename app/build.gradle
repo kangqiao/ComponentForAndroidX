@@ -90,10 +90,10 @@ dependencies {
     api project(':store:wanandroid')
     implementation project(':libs:base')
 
-    runtimeOnly project(':modules:home')
-    runtimeOnly project(':modules:knowledge')
-    runtimeOnly project(':modules:user')
-    runtimeOnly project(':modules:project')
+    api project(':modules:home')
+    api project(':modules:knowledge')
+    api project(':modules:user')
+    api project(':modules:project')
 
     kapt arouterCompilerKapt
 

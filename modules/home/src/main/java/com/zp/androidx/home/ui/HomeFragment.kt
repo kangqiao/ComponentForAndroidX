@@ -12,10 +12,8 @@ import cn.bingoogolapple.bgabanner.BGABanner
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.bumptech.glide.Glide
-import com.chad.library.adapter.base.BaseQuickAdapter
 import com.zp.androidx.base.arch.BaseFragment
 import com.zp.androidx.base.arch.mvvm.*
-import com.zp.androidx.base.common.DBViewHolder
 import com.zp.androidx.base.common.DataBindingQuickAdapter
 import com.zp.androidx.base.common.DataBindingViewHolder
 import com.zp.androidx.base.ui.WebActivity
@@ -55,9 +53,8 @@ class HomeFragment : BaseFragment() {
     }
 
     private val viewModel by viewModel<HomeViewModel>()
-    //private lateinit var statusView: StatusView
     val bannerView: BGABanner by lazy { initAndAddBannerView() }
-    private lateinit var adapter: BaseQuickAdapter<Article, DBViewHolder>
+    private lateinit var adapter: DataBindingQuickAdapter<Article>
     private var isRefresh = false
     private var bannerList: List<BannerItem>? = null
 
@@ -66,7 +63,6 @@ class HomeFragment : BaseFragment() {
     }
 
     override fun initView(view: View) {
-        //statusView = initStatusView(R.id.recyclerView)
         statusView.config(StatusViewBuilder.Builder()
             .setOnEmptyRetryClickListener {
                 requestHomeData(true, 0)
@@ -87,8 +83,8 @@ class HomeFragment : BaseFragment() {
             addItemDecoration(DividerItemDecoration(_mActivity, DividerItemDecoration.VERTICAL).apply {
                 ContextCompat.getDrawable(_mActivity, R.drawable.base_divider_line)?.let { setDrawable(it) }
             })
-        }.adapter = object : BaseQuickAdapter<Article, DBViewHolder>(R.layout.home_item_home) {
-            override fun convert(holder: DBViewHolder, item: Article) {
+        }.adapter = object : DataBindingQuickAdapter<Article>(R.layout.home_item_home) {
+            override fun convert(holder: DataBindingViewHolder, item: Article?) {
                 holder.bindTo(BR.item, item)
             }
         }.apply {
@@ -115,12 +111,12 @@ class HomeFragment : BaseFragment() {
                                             this@run.collect = collect
                                             adapter.setData(position, this@run) //刷新当前ItemView.
                                         }
-                                        result.data?.let { CtxUtil.showToast(it) }
+                                        result.data?.let { showToast(it) }
                                     }
                                 })
                         } else {
                             ARouter.getInstance().build(RouterConfig.User.LOGIN).navigation()
-                            CtxUtil.showToast(R.string.login_tint)
+                            showToast(R.string.login_tint)
                         }
                     }
                 }
@@ -171,7 +167,7 @@ class HomeFragment : BaseFragment() {
      * 延时初始化BannerView
      */
     private fun initAndAddBannerView(): BGABanner {
-        val bannerLayout = LayoutInflater.from(recyclerView.context).inflate(R.layout.home_banner_layout, null, false)
+        val bannerLayout = LayoutInflater.from(recyclerView.context).inflate(R.layout.home_banner_layout, recyclerView, false)
         val banner: BGABanner = bannerLayout.findViewById(R.id.banner)
         banner.run {
             setAdapter { _, itemView, model, _ ->

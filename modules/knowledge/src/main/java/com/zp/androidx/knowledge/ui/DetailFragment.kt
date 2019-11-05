@@ -63,7 +63,6 @@ class DetailFragment : BaseFragment() {
     @Autowired(name = CONTENT_CID_KEY)
     @JvmField var cid: Int = -1
 
-    val viewModel2 = currentScope.inject<ViewModel>()
     private val viewModel by viewModel<ViewModel>()
     private lateinit var adapter: BaseQuickAdapter<Article, DBViewHolder>
 

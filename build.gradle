@@ -19,7 +19,7 @@ buildscript {
         maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.1'
+        classpath 'com.android.tools.build:gradle:3.5.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
         classpath "org.jetbrains.kotlin:kotlin-android-extensions:${versions.kotlin}"
         // NOTE: Do not place your application dependencies here; they belong

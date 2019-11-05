@@ -14,6 +14,6 @@ val moduleList = module(createdAtStart = true) {
     viewModel { ViewModel(get()) }
 
     // HomeApi 网络请求
-    single<ServerAPI> { RetrofitHelper.createService(ServerAPI::class.java) }
+    single { RetrofitHelper.createService(ServerAPI::class.java) }
 
 }
