@@ -20,7 +20,7 @@ class HomeViewModel(
     val articleData = MutableLiveData<ArticleResponseBody>()
     val bannerList = MutableLiveData<List<BannerItem>>()
 
-    fun getArticleData(num: Int){
+    fun getArticleData(num: Int) {
         if (0 == num) events.value = LoadingEvent
         launch {
             homeApi.getArticles(num)
@@ -36,6 +36,11 @@ class HomeViewModel(
                     events.value = ExceptionEvent(it)
                 })
         }
+    }
+
+    fun getArticleList(num: Int) {
+        if (0 == num) events.value = LoadingEvent
+
     }
 
     fun getBannerList(){

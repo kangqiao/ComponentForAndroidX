@@ -286,3 +286,6 @@
 
 # for DexGuard only
 -keepresourcexmlelements manifest/application/meta-data@value=GlideModule
+
+#
+-keep class com.zp.androidx.security.SecurityManager { *; }

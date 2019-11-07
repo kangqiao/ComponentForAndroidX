@@ -47,6 +47,7 @@ dependencies {
         exclude group: 'com.android.support'
     })
 
+    api project(':libs:security')
     api project(':libs:common')
     api project(':libs:component')
     api project(":libs:net")

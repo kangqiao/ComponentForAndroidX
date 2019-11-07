@@ -5,11 +5,9 @@ import android.content.Context
 import android.content.res.Configuration
 import androidx.multidex.MultiDexApplication
 import com.alibaba.android.arouter.launcher.ARouter
-import com.bumptech.glide.annotation.GlideModule
 import com.zp.androidx.base.common.initLogger
 import com.zp.androidx.base.utils.CrashHandler
 import com.zp.androidx.base.utils.I18NUtil
-import com.zp.androidx.base.utils.SPUtil
 import me.yokeyword.fragmentation.Fragmentation
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties
@@ -49,6 +47,7 @@ open abstract class MainApp: BaseApp(){
 
 open abstract class BaseApp: MultiDexApplication() {
     companion object {
+        const val TAG = "BaseApp"
         open lateinit var application: Application private set
     }
 

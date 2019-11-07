@@ -8,7 +8,7 @@ include 'store:wanandroid'
 include ':libs:lib_picker',  'libs:lib_statusview'
 
 // 基础包
-include ':libs:common', ':libs:component', ':libs:base', ':libs:net'
+include ':libs:common', ':libs:component', ':libs:base', ':libs:net', ':libs:fuel', ':libs:security'
 
 // 模块包
 include ':modules:knowledge', ':modules:user', ':modules:project', ':modules:home' //, ':modules:test'

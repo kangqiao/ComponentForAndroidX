@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
 
@@ -11,8 +12,6 @@ android {
         versionCode 1
         versionName "1.0"
     }
-
-    resourcePrefix project.getName() + "_"
 
     buildTypes {
         release {
@@ -38,14 +37,7 @@ android {
 }
 
 dependencies {
-    api fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
-
-    api netLibs
-
-    //api rootProject.ext.supportDeps["appcompatv7"]
-    //api rootProject.ext.otherDeps["spongycastle"]
-    //api rxJavaLibs
-    //api jacksonLibs
-    //api retrofitLibs
+    api fuelLibs
 }

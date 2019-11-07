@@ -9,3 +9,4 @@
 find . -name "*.iml" | xargs rm -rf
 rm -rf ./.idea
 rm -rf ./build
+rm -rf ./libs/security/.cxx
